@@ -35,6 +35,27 @@ class BinarySearchTreeNode:
             else:
                 return False
 
+    def delete(self, val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.delete(val)
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.delete(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            elif self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.right
+
+            max_val = self.left.find_max()
+            self.data = max_val
+            self.left = self.left.delete(max_val)
+
+        return self
+
     def in_order_traversal(self):
         elements = []
         if self.left:
@@ -96,7 +117,7 @@ letters_tree = build_tree(letters)
 numbers = [53, 59, 63, 91, 64, 57, 39, 78, 18, 9, 17, 30, 45, 33, 39, 27, 22, 10, 19, 15, 40, 47]
 numbers_tree = build_tree(numbers)
 
-
+print('='*30)
 print("The sample letter list is:",letters)
 print('='*30)
 print("In-order traversal gives this sorted list:",letters_tree.in_order_traversal())
@@ -113,9 +134,27 @@ print("Minimum Letter:",letters_tree.find_min())
 print('='*30)
 print("Maximum Letter:",letters_tree.find_max())
 print('='*30)
+
+if __name__ == '__main__':
+    letters_tree.delete("I")
+    print("After deleting I, shown via In-order traversal: ",letters_tree.in_order_traversal())
+
+print('='*30)
 print()
+print('='*30)
 print()
+print('='*30)
 print("The sample number list is:",numbers)
+print('='*30)
+print("In-order traversal gives this sorted list:",numbers_tree.in_order_traversal())
+print('='*30)
+print("Post-order traversal gives this sorted list:",numbers_tree.post_order_traversal())
+print('='*30)
+print("Pre-order traversal gives this sorted list:",numbers_tree.pre_order_traversal())
+print('='*30)
+print("Is 45 included in the list?",numbers_tree.search(45))
+print('='*30)
+print("Is 69 included in the list?",numbers_tree.search(69))
 print('='*30)
 print("Minimum Number:",numbers_tree.find_min())
 print('='*30)
