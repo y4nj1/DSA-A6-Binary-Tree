@@ -67,6 +67,21 @@ class BinarySearchTreeNode:
 
         return elements
 
+    def find_max(self):
+        if self.right is None:
+            return self.data
+        return self.right.find_max()
+
+    def find_min(self):
+        if self.left is None:
+            return self.data
+        return self.left.find_min()
+    
+    def calculate_sum(self):
+        left_sum = self.left.calculate_sum() if self.left else 0
+        right_sum = self.right.calculate_sum() if self.right else 0
+        return self.data + left_sum + right_sum
+
 def build_tree(elements):
     root = BinarySearchTreeNode(elements[0])
 
@@ -78,7 +93,11 @@ def build_tree(elements):
 letters = ["G", "I", "A", "N", "C", "A", "R", "L", "O", "B", "I", "R", "O", "N", "E", "S", "T", "R", "E", "L", "L", "A"]
 letters_tree = build_tree(letters)
 
-print("The sample list is:",letters)
+numbers = [53, 59, 63, 91, 64, 57, 39, 78, 18, 9, 17, 30, 45, 33, 39, 27, 22, 10, 19, 15, 40, 47]
+numbers_tree = build_tree(numbers)
+
+
+print("The sample letter list is:",letters)
 print('='*30)
 print("In-order traversal gives this sorted list:",letters_tree.in_order_traversal())
 print('='*30)
@@ -89,4 +108,18 @@ print('='*30)
 print("Is the letter E included in the list?",letters_tree.search("E"))
 print('='*30)
 print("Is the letter Y included in the list?",letters_tree.search("Y"))
+print('='*30)
+print("Minimum Letter:",letters_tree.find_min())
+print('='*30)
+print("Maximum Letter:",letters_tree.find_max())
+print('='*30)
+print()
+print()
+print("The sample number list is:",numbers)
+print('='*30)
+print("Minimum Number:",numbers_tree.find_min())
+print('='*30)
+print("Maximum Number:",numbers_tree.find_max())
+print('='*30)
+print("Sum:", numbers_tree.calculate_sum())
 print('='*30)
