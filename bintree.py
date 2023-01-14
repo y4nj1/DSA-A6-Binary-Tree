@@ -19,6 +19,22 @@ class BinarySearchTreeNode:
             else:
                 self.right = BinarySearchTreeNode(data)
 
+    def search(self, val):
+        if self.data == val:
+            return True
+
+        if val < self.data:
+            if self.left:
+                return self.left.search(val)
+            else:
+                return False
+
+        if val > self.data:
+            if self.right:
+                return self.right.search(val)
+            else:
+                return False
+
     def in_order_traversal(self):
         elements = []
         if self.left:
@@ -63,6 +79,14 @@ letters = ["G", "I", "A", "N", "C", "A", "R", "L", "O", "B", "I", "R", "O", "N",
 letters_tree = build_tree(letters)
 
 print("The sample list is:",letters)
+print('='*30)
 print("In-order traversal gives this sorted list:",letters_tree.in_order_traversal())
+print('='*30)
 print("Post-order traversal gives this sorted list:",letters_tree.post_order_traversal())
+print('='*30)
 print("Pre-order traversal gives this sorted list:",letters_tree.pre_order_traversal())
+print('='*30)
+print("Is the letter E included in the list?",letters_tree.search("E"))
+print('='*30)
+print("Is the letter Y included in the list?",letters_tree.search("Y"))
+print('='*30)
