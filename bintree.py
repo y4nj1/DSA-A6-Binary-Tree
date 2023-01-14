@@ -18,3 +18,28 @@ class BinarySearchTreeNode:
                 self.right.add_child(data)
             else:
                 self.right = BinarySearchTreeNode(data)
+
+    def in_order_traversal(self):
+        elements = []
+        if self.left:
+            elements += self.left.in_order_traversal()
+
+        elements.append(self.data)
+
+        if self.right:
+            elements += self.right.in_order_traversal()
+
+        return elements
+
+def build_tree(elements):
+    root = BinarySearchTreeNode(elements[0])
+
+    for i in range(1,len(elements)):
+        root.add_child(elements[i])
+
+    return root
+
+letters = ["G", "I", "A", "N", "C", "A", "R", "L", "O", "B", "I", "R", "O", "N", "E", "S", "T", "R", "E", "L", "L", "A"]
+letters_tree = build_tree(letters)
+
+print("In order traversal gives this sorted list:",letters_tree.in_order_traversal())
